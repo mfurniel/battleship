@@ -1,4 +1,4 @@
-import barco
+from clases import barco 
 from busquedas.greedy import busqueda_greedy 
 from busquedas.greedy_hunt import busqueda_greedy_hunt
 
@@ -10,7 +10,7 @@ class Agente:
 
     def agregar_barcos_predeterminados(self):
         barcos = [
-            barco.Barco("Portaaviones", 5),
+            barco.Barco("Portaaviones", 5   ),
             barco.Barco("Acorazado", 4),
             barco.Barco("Destructor", 3),
             barco.Barco("Submarino", 3),
@@ -20,10 +20,10 @@ class Agente:
 
     #LA idea seria agregar aqui las busquedas
     def greedy(self):
-        busqueda_greedy(self)
+        busqueda_greedy()
     
     def greedy_hunt(self):
-        busqueda_greedy_hunt(self)
+        busqueda_greedy_hunt()
 
     
     
