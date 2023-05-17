@@ -21,12 +21,40 @@ class Agente:
         ]
         self.memoria.extend(barcos)
 
+    #la idea era identificar el barco en si, pero podria darse el caso
+    #en que no se pueda distinguir si es tal o cual barco, si estan juntos,
+    #podria ser buena idea revisae eso si
+
+    # def flota_rival_hundida1(self):
+    #     for i in self.memoria:
+    #         if(i.encontrado==False):
+    #             return False
+    #     return True   
+    
+    def flota_rival_hundida(self):
+        count_x = sum(row.count('X') for row in self.tablerobBusqueda)
+        if(count_x == 17):
+            return True
+        return False  
+
+    def pregunta(self,rival,coordenada_x,coordenada_y):
+        return rival.respuesta(rival,coordenada_x,coordenada_y)
+
+    def respuesta(self,rival,coordenada_x,coordenada_y):
+        if(rival.tableroPropio[coordenada_x][coordenada_y]==0):
+            return False
+        if(rival.tableroPropio[coordenada_x][coordenada_y]==1):
+            return True
+        return False
+
+    
     #LA idea seria agregar aqui las busquedas
-    def greedy(self,tablero):
-        busqueda_greedy(tablero)
+
+    def greedy(self,rival):
+        busqueda_greedy(self,rival)
     
     def greedy_hunt(self):
-        busqueda_greedy_hunt()
+        busqueda_greedy_hunt(self)
 
     
     

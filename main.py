@@ -9,8 +9,14 @@ from clases.agente import Agente
 
 jugadorIA = Agente()
 jugadorRival = Agente()
+jugadorIA.greedy(jugadorRival)
+creartablero.imprimirTablero(jugadorRival.tableroPropio)
+creartablero.imprimirTablero(jugadorIA.tablerobBusqueda)
 
-creartablero.imprimirTableroSinCeros(jugadorIA.tableroPropio)
+#game
+
+
+
 
 
 #jugadorIA.greedy(tablero)
