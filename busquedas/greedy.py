@@ -8,6 +8,7 @@ def busqueda_greedy(self,rival):
       print(flag)
       print(str(i),' ' , str(j) )
       turnos=turnos+1
+      self.tablerobBusqueda[i][j]='E'
       if(self.pregunta(rival,i,j)):
         self.tablerobBusqueda[i][j]='X'
         flag = self.flota_rival_hundida()
