@@ -2,6 +2,8 @@ from clases import barco
 import creartablero
 from busquedas.greedy import busqueda_greedy 
 from busquedas.greedy_hunt import busqueda_greedy_hunt
+from busquedas.aleatorio import busqueda_aleatoria
+
 
 class Agente:
     def __init__(self):
@@ -55,6 +57,9 @@ class Agente:
     
     def greedy_hunt(self):
         busqueda_greedy_hunt(self)
+
+    def aleatorio(self,rival):
+        busqueda_aleatoria(self,rival)
 
     
     

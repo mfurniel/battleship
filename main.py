@@ -13,6 +13,10 @@ jugadorIA.greedy(jugadorRival)
 creartablero.imprimirTablero(jugadorRival.tableroPropio)
 creartablero.imprimirTablero(jugadorIA.tablerobBusqueda)
 
+#para aleatorio voy a usar y para diferenciar que hizo greedy y que hizo aleatorio
+jugadorIA.aleatorio(jugadorRival)
+
+creartablero.imprimirTablero(jugadorIA.tablerobBusqueda)
 #game
 
 
