@@ -8,7 +8,7 @@ class Direccion:
         self.escogido = False
 
 
-def hunt_target(coordenada_x,coordenada_y,tablerobusqueda,tablerorival):
+def hunt_target(coordenada_x,coordenada_y,self,rival):
 
     direcciones = [
     Direccion("Norte", True, (0, 1)),
@@ -22,7 +22,7 @@ def hunt_target(coordenada_x,coordenada_y,tablerobusqueda,tablerorival):
         print('coordenadas no validas')
         return
     
-    verificar_direcciones(coordenada_x, coordenada_y, tablerobusqueda, direcciones)
+    verificar_direcciones(coordenada_x, coordenada_y, self.tableroBusqueda, direcciones)
 
     direcciones_validas = [direccion for direccion in direcciones if direccion.valido and not direccion.escogido]
     
@@ -35,6 +35,22 @@ def hunt_target(coordenada_x,coordenada_y,tablerobusqueda,tablerorival):
         dx, dy = direccion_elegida.direccion
         nueva_coordenada_x, nueva_coordenada_y = coordenada_x + dx, coordenada_y + dy
         
+        
+        if(self.pregunta(rival,nueva_coordenada_x,nueva_coordenada_y)):
+            self.tablerobBusqueda[nueva_coordenada_x][nueva_coordenada_y]='X'
+            while(direccion_elegida.valido):
+                nueva_coordenada_x, nueva_coordenada_y = coordenada_x + dx, coordenada_y + dy
+                if nueva_coordenada_x < 0 or nueva_coordenada_x >= 10 or nueva_coordenada_y < 0 or nueva_coordenada_y >= 10:
+                    break 
+                if(self.pregunta(rival,nueva_coordenada_x,nueva_coordenada_y)):
+                    self.tablerobBusqueda[nueva_coordenada_x][nueva_coordenada_y]='X'
+                else:
+                    self.tablerobBusqueda[nueva_coordenada_x][nueva_coordenada_y]='E'    
+                    direccion_elegida.valido=False
+        else:
+            self.tablerobBusqueda[nueva_coordenada_x][nueva_coordenada_y]='E'    
+            direccion_elegida.valido=False
+            direcciones_validas = [direccion for direccion in direcciones if direccion.valido and not direccion.escogido]
         # Realizar acciones con la dirección elegida
         # ...
     else:
