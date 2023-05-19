@@ -25,4 +25,5 @@ jugadorIA.aleatorio(jugadorRival)
 
 #jugadorIA.greedy(tablero)
 
+#nose si esto esta funcionado bien aiuda
 
