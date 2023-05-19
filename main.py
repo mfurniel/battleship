@@ -25,4 +25,7 @@ jugadorIA.aleatorio(jugadorRival)
 
 #jugadorIA.greedy(tablero)
 
+#Estoy en la rama de prueba
+
+
 
