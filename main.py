@@ -10,13 +10,15 @@ from clases.agente import Agente
 jugadorIA = Agente()
 jugadorRival = Agente()
 jugadorIA.greedy(jugadorRival)
+print("tablero original")
 creartablero.imprimirTablero(jugadorRival.tableroPropio)
+print("tablero con Greedy")
 creartablero.imprimirTablero(jugadorIA.tablerobBusqueda)
 
 #para aleatorio voy a usar y para diferenciar que hizo greedy y que hizo aleatorio
 jugadorIA.aleatorio(jugadorRival)
 
-#creartablero.imprimirTablero(jugadorIA.tablerobBusqueda)
+creartablero.imprimirTablero(jugadorIA.tablerobBusqueda)
 #game
 
 
