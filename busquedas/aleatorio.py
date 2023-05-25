@@ -10,6 +10,7 @@ def busqueda_aleatoria(self,rival):
     for i in range(0,99):
       fila_aleatoria = random.randint(0,9)
       columna_aleatoria = random.randint(0,9)
+      self.tablerobBusqueda[fila_aleatoria][columna_aleatoria]='E'
       if self.pregunta(rival, fila_aleatoria,columna_aleatoria):
         print(" fila ", fila_aleatoria, " columna ", columna_aleatoria)
         print(self.pregunta(rival, fila_aleatoria,columna_aleatoria))

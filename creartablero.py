@@ -36,6 +36,7 @@ def imprimirTableroSinCeros(matriz):
 
 import random
 
+
 def generar_tablero(filas, columnas):
     tablero = []
     for i in range(filas):

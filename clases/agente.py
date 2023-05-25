@@ -61,6 +61,7 @@ class Agente:
     def aleatorio(self,rival):
         busqueda_aleatoria(self,rival)
 
-    
+    def cambiar_tablero_propio(self,tablero):
+        self.tableroPropio=tablero
     
 
