@@ -13,10 +13,19 @@ def busqueda_greedy(self,rival):
           self.tableroBusqueda[i][j]='X'
           flag=True
           self.modo='target'
-          self.coodenada_hunted = (i,j)
+          if(self.nombre=='IA'):
+            print('greedy X')
+            print('x: ',j,'y: ',i)
+            print('greedy X')
+          self.coordenada_hunted = (j,i)
           break
         else:
           self.tableroBusqueda[i][j]='E'
+          self.modo='hunt'
+          if(self.nombre=='IA'):
+            print('greedy E')
+            print('x: ',j,'y: ',i)
+            print('greedy E')
           flag=True
           break
 

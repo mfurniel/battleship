@@ -1,3 +1,4 @@
+from busquedas.modo_target3 import neo_target
 from clases import barco 
 import creartablero
 from busquedas.greedy import busqueda_greedy 
@@ -15,7 +16,7 @@ class Agente:
         self.memoria = []
         self.turnos=0
         self.modo='hunt'
-        self.coordenada_hunted=(0,0)
+        self.coordenada_hunted=(0,0) #columna-fila; lo vemos como coordenada x y
         self.direccion_target='none'
         self.agregar_barcos_predeterminados()
         creartablero.agregar_barcos(self.tableroPropio, [5, 4, 3, 3, 2])
@@ -54,7 +55,7 @@ class Agente:
             return False
         if(rival.tableroPropio[coordenada_x][coordenada_y]==1):
             return True
-        return False
+        return 0
     
     def cambiar_tablero_propio(self,tablero):
         self.tableroPropio=tablero
@@ -81,16 +82,16 @@ class Agente:
     def hunt_target(self,rival,busqueda_hunt):
         # print(self.nombre,' - ',self.modo,' - ',self.direccion_target)
         # print(self.coordenada_hunted)
-        # if(self.modo=='hunt'):
+        if(self.modo=='hunt'):
 
         # if(self.nombre=='IA'):   
         #      print(self.direccion_target)
 
-        if(busqueda_hunt=='greedy'):
+            if(busqueda_hunt=='greedy'):
                 busqueda_greedy(self,rival)
-        if(busqueda_hunt=='aleatorio'):
+            if(busqueda_hunt=='aleatorio'):
                 busqueda_aleatoria(self,rival)
-        if(busqueda_hunt=='aleatorio_restringido'):
+            if(busqueda_hunt=='aleatorio_restringido'):
                 busqueda_aleatoria_restringida(self,rival)
             
             #print('hunt')
@@ -99,8 +100,8 @@ class Agente:
 
             #print('target1')
 
-            target(self,rival)         
-               
+            neo_target(self,rival)         
+
             #print('target2')
         # if(self.nombre=='IA'):   
         #     creartablero.imprimirTablero(self.tableroBusqueda)

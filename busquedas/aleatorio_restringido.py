@@ -19,6 +19,10 @@ def busqueda_aleatoria_restringida(self, rival):
 
         if self.pregunta(rival, fila, columna):
             self.tableroBusqueda[fila][columna] = 'X'
+
+            self.modo='target'
+            self.coodenada_hunted = (fila,columna)
+
             self.turnos=self.turnos+1
             self.modo='target'
             self.coodenada_hunted = (fila,columna)
