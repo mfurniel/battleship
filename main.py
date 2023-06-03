@@ -23,8 +23,8 @@ for i in range(len(matriz)):
 
 jugadorIA = Agente('IA')
 jugadorRival = Agente('Rival')
-jugadorIA.cambiar_tablero_propio(matriz)
-jugadorRival.cambiar_tablero_propio(matriz1)
+# jugadorIA.cambiar_tablero_propio(matriz)
+# jugadorRival.cambiar_tablero_propio(matriz1)
 
 
 creartablero.imprimirTableroSinCeros(jugadorIA.tableroPropio)

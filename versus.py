@@ -121,7 +121,7 @@ def huntTarget_vs_huntTarget(jugadorIA,jugadorRival):
         while(contador(jugadorIA.tableroBusqueda)!=cambiosIA+1): 
             print(cambiosIA)
             print(contador(jugadorIA.tableroBusqueda))
-            jugadorIA.hunt_target(jugadorRival,'greedy')
+            jugadorIA.hunt_target(jugadorRival,'aleatorio_restringido')
 
         cambiosIA=cambiosIA+1
 

@@ -29,6 +29,8 @@ def neo_target(self,rival):
         nueva_x, nueva_y = nueva_x + direccion_elegida.direccion[0], nueva_y + direccion_elegida.direccion[1]
 
         if(self.nombre=='IA'):
+            for a in direcciones_validas:
+                print('direcciones validas: ',a.nombre)
             print('direccion elegida: ',direccion_elegida.nombre)
             print('x: ',self.coordenada_hunted[0],'y: ',self.coordenada_hunted[1])
             print('direccion x: ', direccion_elegida.direccion[0],'direccion y: ',direccion_elegida.direccion[1])
@@ -56,13 +58,21 @@ def neo_target(self,rival):
             self.modo='target'
             self.direccion_target=direccion_elegida.nombre
             return 0
-        else:
+        else: #arreglar aca!!!! ha qe guardar las direcciones o algo asi
             if(self.nombre=='IA'):
                 print('no acerto y puso E')
             self.tableroBusqueda[nueva_y][nueva_x]='E'
-            self.modo='hunt'
-            self.coordenada_hunted = (0, 0)
+            direccion_elegida.valido=False
+            direcciones_validas = [direccion for direccion in direcciones if direccion.valido]
             self.direccion_target='none'
+            self.modo='hunt'
+            # if len(direcciones_validas)==0:
+            #     print('E pero no hay mas direcciones')
+            #     for a in direcciones_validas:
+            #         print(a.nombre)
+            #     self.modo='hunt'
+            #     self.coordenada_hunted = (0, 0)
+            #     self.direccion_target='none'
             return 0
         
     if(self.nombre=='IA'):
@@ -88,19 +98,36 @@ def direcciones_elegidas(self):
     if not coordendas_dentro_tablero(x,y):
         return direcciones_validas
     
-    verificar_direcciones(x, y, self.tableroBusqueda, direcciones) #aqui hay algo que no entiendo pero parece que funca si es x la fila o la columna aaahhh
+    verificar_direcciones(self,x, y, self.tableroBusqueda, direcciones) #aqui hay algo que no entiendo pero parece que funca si es x la fila o la columna aaahhh
 
     direcciones_validas = [direccion for direccion in direcciones if direccion.valido]
 
     return direcciones_validas
 
-def verificar_direcciones(fila, columna, tablerobusqueda,direcciones):
-      for direccion in direcciones:
+def verificar_direcciones(self,fila, columna, tablerobusqueda,direcciones):
+    # print('-verificando direcciones validas-')
+    for direccion in direcciones:
+        if(self.nombre=='IA'):
+            print(direccion.nombre)
         d_columna, d_fila = direccion.direccion
-        new_columna, new_fila = columna + d_columna, fila + d_fila
+        if(self.nombre=='IA'):
+            print('valor columna: ',d_columna,'valor fila: ',d_fila)
+        new_columna, new_fila = columna + d_fila, fila + d_columna
+        if(self.nombre=='IA'):
+            print(columna,' + ',d_columna,' = ',new_columna)
+            print(fila,' + ',d_fila,' = ',d_fila)
         if new_columna >= 0 and new_columna < 10 and new_fila >= 0 and new_fila < 10:
+            if(self.nombre=='IA'):        
+                print('tablerodebusqueda[',new_columna,']','[',new_fila,']')
             if tablerobusqueda[new_columna][new_fila] == 0:
+                if(self.nombre=='IA'):
+                    print('cumple')
                 direccion.valido = True
+            else:
+                if self.nombre=='IA':
+                    print('valor no es 0')
+    print('--verificando direcciones validas--')
+
 
 #En esta fucnion no importa si x es fila o columna ya que si nose cumple esto funciona
 # igual; adema nos aprovechamos del hecho de que es un tablero de 10x10 osea cuadrado 
