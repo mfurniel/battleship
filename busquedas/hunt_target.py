@@ -87,4 +87,3 @@ def verificar_direcciones(coordenada_x, coordenada_y, tablerobusqueda,direccione
 
 
 
-
