@@ -75,6 +75,9 @@ class Agente:
 
     def aleatorio(self,rival):
         busqueda_aleatoria(self,rival)
+
+    def cambiar_tablero_propio(self,tablero):
+        self.tableroPropio=tablero
     
     def aleatorio_restringido(self,rival):
         busqueda_aleatoria_restringida(self,rival)
