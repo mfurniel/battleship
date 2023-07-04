@@ -1,11 +1,10 @@
-from busquedas.modo_target3 import neo_target
 from clases import barco 
 import creartablero
 from busquedas.greedy import busqueda_greedy 
-from busquedas.greedy_hunt import busqueda_greedy_hunt
+from busquedas.modo_target import target
 from busquedas.aleatorio import busqueda_aleatoria
 from busquedas.aleatorio_restringido import busqueda_aleatoria_restringida
-from busquedas.modo_target2 import target
+
 
 
 class Agente:
@@ -69,9 +68,6 @@ class Agente:
 
     def greedy(self,rival):
         busqueda_greedy(self,rival)
-    
-    def greedy_hunt(self,rival):
-        busqueda_greedy_hunt(self,rival)
 
     def aleatorio(self,rival):
         busqueda_aleatoria(self,rival)
@@ -103,7 +99,7 @@ class Agente:
 
             #print('target1')
 
-            neo_target(self,rival)         
+            target(self,rival)         
 
             #print('target2')
         # if(self.nombre=='IA'):   

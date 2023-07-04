@@ -1,98 +1,140 @@
+from clases import direccion as cardinal
 import random
 
-class Direccion:
-    def __init__(self, nombre, valido, direccion):
-        self.nombre = nombre
-        self.valido = valido
-        self.direccion = direccion
-
-
 def target(self,rival):
-    coordenada_x, coordenada_y= self.coordenada_hunted
-    print('coordanadas: ',coordenada_x,' ',coordenada_y)
+    #revisar si la flota esta hundida? no deberia en teoria
+    #revisamos si las coordenadas se encuentran dentro del tablero? deberian siempre estar dentro la verdad
+    nueva_x=self.coordenada_hunted[0]
+    nueva_y=self.coordenada_hunted[1]
 
-    direcciones = [
-    Direccion("Norte", False, (0, -1)),
-    Direccion("Sur", False, (0, 1)),
-    Direccion("Este", False, (1, 0)),
-    Direccion("Oeste", False, (-1, 0))
-    ]
+    direcciones = []
+    if(self.direccion_target=='none'):
+        direcciones=direcciones_elegidas(self)
+    else:
+        if(self.direccion_target=='Norte'):
+            direcciones.append(cardinal.Direccion("Norte", True, (0, -1))) # columna fila; lo vemos como coordanda x y
+        if(self.direccion_target=='Sur'):
+            direcciones.append(cardinal.Direccion("Sur", True, (0, 1))) # columna fila; lo vemos como coordanda x y
+        if(self.direccion_target=='Este'):
+            direcciones.append(cardinal.Direccion("Este", True, (1, 0))) # columna fila; lo vemos como coordanda x y
+        if(self.direccion_target=='Oeste'):
+            direcciones.append(cardinal.Direccion("Oeste", True, (-1, 0))) # columna fila; lo vemos como coordanda x y 
 
-
-    if (coordenada_x < 0 or coordenada_x >= 10 or coordenada_y < 0 or coordenada_y >= 10):
-        print('coordenadas no validas')
-        return 0
-    
-    verificar_direcciones(coordenada_x, coordenada_y, self.tableroBusqueda, direcciones)
     direcciones_validas = [direccion for direccion in direcciones if direccion.valido]
+    
+    while(len(direcciones_validas)!=0):
 
-    #print('cantidad largos: ',len(direcciones_validas))
-
-    nueva_coordenada_x = coordenada_x
-    nueva_coordenada_y = coordenada_y
-
-    while len(direcciones_validas)!=0:
-        if(self.flota_rival_hundida()):
-            break
         direcciones_validas = [direccion for direccion in direcciones if direccion.valido]
-        print(len(direcciones_validas))
-        for i in direcciones_validas:
-            print(i.nombre)
-        
-        if(len(direcciones_validas)==0):
-            break
-
         direccion_elegida = random.choice(direcciones_validas)
-        #direccion_elegida.escogido = True  # Marcar la dirección como escogida
+        nueva_x, nueva_y = nueva_x + direccion_elegida.direccion[0], nueva_y + direccion_elegida.direccion[1]
 
-        print('direccion seleccionda: ',direccion_elegida.nombre)
-       
-        dx, dy = direccion_elegida.direccion
-        nueva_coordenada_x, nueva_coordenada_y = nueva_coordenada_x + dx, nueva_coordenada_y + dy
+        # if(self.nombre=='IA'):
+        #     for a in direcciones_validas:
+        #         print('direcciones validas: ',a.nombre)
+        #     print('direccion elegida: ',direccion_elegida.nombre)
+        #     print('x: ',self.coordenada_hunted[0],'y: ',self.coordenada_hunted[1])
+        #     print('direccion x: ', direccion_elegida.direccion[0],'direccion y: ',direccion_elegida.direccion[1])
+        #     print('neo x: ',nueva_x,'neo y: ',nueva_y)
 
-        if nueva_coordenada_x < 0 or nueva_coordenada_x >= 10 or nueva_coordenada_y < 0 or nueva_coordenada_y >= 10:
-            direccion_elegida.valido=False
-            break 
- 
-        if(self.pregunta(rival,nueva_coordenada_x,nueva_coordenada_y)):
-            
-            self.tableroBusqueda[nueva_coordenada_x][nueva_coordenada_y]='X'
-            while(direccion_elegida.valido):
-
-                if(self.flota_rival_hundida()):
-                    break 
-                              
-                nueva_coordenada_x, nueva_coordenada_y = nueva_coordenada_x + dx, nueva_coordenada_y + dy
-                if nueva_coordenada_x < 0 or nueva_coordenada_x >= 10 or nueva_coordenada_y < 0 or nueva_coordenada_y >= 10:
-                    direccion_elegida.valido=False
-                    break 
-                if(self.pregunta(rival,nueva_coordenada_x,nueva_coordenada_y)):
-                    self.tableroBusqueda[nueva_coordenada_x][nueva_coordenada_y]='X'
-                else:
-                    self.tableroBusqueda[nueva_coordenada_x][nueva_coordenada_y]='E'    
-                    direccion_elegida.valido=False
-        else:
-            if(self.flota_rival_hundida()):
-                break
-            self.tableroBusqueda[nueva_coordenada_x][nueva_coordenada_y]='E'    
+        if nueva_x < 0 or nueva_x >= 10 or nueva_y < 0 or nueva_y >= 10:
+            # if(self.nombre=='IA'):
+            #     print('no esta dentro del tablero')
             direccion_elegida.valido=False
             direcciones_validas = [direccion for direccion in direcciones if direccion.valido]
-    else:
-        print('No hay direcciones válidas')
+            continue
 
+        if self.tableroBusqueda[nueva_y][nueva_x]!=0:
+            # if(self.nombre=='IA'):
+            #     print('es distinto de 0')
+            direccion_elegida.valido=False
+            direcciones_validas = [direccion for direccion in direcciones if direccion.valido]
+            continue 
+
+        if self.pregunta(rival,nueva_y,nueva_x):
+            # if(self.nombre=='IA'):
+            #     print('al parecer acerto')
+            self.tableroBusqueda[nueva_y][nueva_x]='X'
+            self.turnos=self.turnos+1
+            self.coordenada_hunted=nueva_x,nueva_y
+            self.modo='target'
+            self.direccion_target=direccion_elegida.nombre
+            return 0
+        else: #arreglar aca!!!! ha qe guardar las direcciones o algo asi
+            # if(self.nombre=='IA'):
+            #     print('no acerto y puso E')
+            self.tableroBusqueda[nueva_y][nueva_x]='E'
+            self.turnos=self.turnos+1
+            direccion_elegida.valido=False
+            direcciones_validas = [direccion for direccion in direcciones if direccion.valido]
+            self.direccion_target='none'
+            self.modo='hunt'
+            # if len(direcciones_validas)==0:
+            #     print('E pero no hay mas direcciones')
+            #     for a in direcciones_validas:
+            #         print(a.nombre)
+            #     self.modo='hunt'
+            #     self.coordenada_hunted = (0, 0)
+            #     self.direccion_target='none'
+            return 0
+        
+    # if(self.nombre=='IA'):
+    #     print('no hay direcciones y volvemos al modo hunt')
+    self.modo='hunt'
+    self.coordenada_hunted = (0, 0)
+    self.direccion_target='none'
     return 0
 
-def verificar_direcciones(coordenada_x, coordenada_y, tablerobusqueda,direcciones):
-      for direccion in direcciones:
-        dx, dy = direccion.direccion
-        new_x, new_y = coordenada_x + dx, coordenada_y + dy
-        if new_x >= 0 and new_x < 10 and new_y >= 0 and new_y <= 10:
-            if tablerobusqueda[new_x][new_y] == 0:
+def direcciones_elegidas(self):
+
+    direcciones = [
+    cardinal.Direccion("Norte", False, (0, -1)), #columna fila; lo vemos como coordanda x y
+    cardinal.Direccion("Sur", False, (0, 1)),   #columna fila; lo vemos como coordanda x y
+    cardinal.Direccion("Este", False, (1, 0)),  #columna fila; lo vemos como coordanda x y
+    cardinal.Direccion("Oeste", False, (-1, 0)) #columna fila; lo vemos como coordanda x y
+    ]
+
+    direcciones_validas = []
+
+    x, y= self.coordenada_hunted
+   
+    if not coordendas_dentro_tablero(x,y):
+        return direcciones_validas
+    
+    verificar_direcciones(self,x, y, self.tableroBusqueda, direcciones) #aqui hay algo que no entiendo pero parece que funca si es x la fila o la columna aaahhh
+
+    direcciones_validas = [direccion for direccion in direcciones if direccion.valido]
+
+    return direcciones_validas
+
+def verificar_direcciones(self,fila, columna, tablerobusqueda,direcciones):
+    # print('-verificando direcciones validas-')
+    for direccion in direcciones:
+        # if(self.nombre=='IA'):
+        #     print(direccion.nombre)
+        d_columna, d_fila = direccion.direccion
+        # if(self.nombre=='IA'):
+        #     print('valor columna: ',d_columna,'valor fila: ',d_fila)
+        new_columna, new_fila = columna + d_fila, fila + d_columna
+        # if(self.nombre=='IA'):
+            # print(columna,' + ',d_columna,' = ',new_columna)
+            # print(fila,' + ',d_fila,' = ',d_fila)
+        if new_columna >= 0 and new_columna < 10 and new_fila >= 0 and new_fila < 10:
+            # if(self.nombre=='IA'):        
+            #     print('tablerodebusqueda[',new_columna,']','[',new_fila,']')
+            if tablerobusqueda[new_columna][new_fila] == 0:
+                # if(self.nombre=='IA'):
+                #     print('cumple')
                 direccion.valido = True
-          
-       
-       
-        
+            # else:
+    #             if self.nombre=='IA':
+    #                 print('valor no es 0')
+    # print('--verificando direcciones validas--')
 
 
-
+#En esta fucnion no importa si x es fila o columna ya que si nose cumple esto funciona
+# igual; adema nos aprovechamos del hecho de que es un tablero de 10x10 osea cuadrado 
+def coordendas_dentro_tablero(x,y):
+      if (x < 0 or x >= 10 or y < 0 or y >= 10):
+        return False
+      else:
+        return True 

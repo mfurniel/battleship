@@ -11,21 +11,23 @@ def busqueda_greedy(self,rival):
         
         if(self.pregunta(rival,i,j)):
           self.tableroBusqueda[i][j]='X'
+          self.turnos=self.turnos+1
           flag=True
           self.modo='target'
-          if(self.nombre=='IA'):
-            print('greedy X')
-            print('x: ',j,'y: ',i)
-            print('greedy X')
+          # if(self.nombre=='IA'):
+          #   print('greedy X')
+          #   print('x: ',j,'y: ',i)
+          #   print('greedy X')
           self.coordenada_hunted = (j,i)
           break
         else:
           self.tableroBusqueda[i][j]='E'
           self.modo='hunt'
-          if(self.nombre=='IA'):
-            print('greedy E')
-            print('x: ',j,'y: ',i)
-            print('greedy E')
+          self.turnos=self.turnos+1
+          # if(self.nombre=='IA'):
+          #   print('greedy E')
+          #   print('x: ',j,'y: ',i)
+          #   print('greedy E')
           flag=True
           break
 

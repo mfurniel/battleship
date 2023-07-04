@@ -22,9 +22,11 @@ def busqueda_aleatoria_restringida(self, rival):
             self.coordenada_hunted = (columna,fila)
             self.modo='target'
             self.coodenada_hunted = (fila,columna)
+            self.turnos=self.turnos + 1
             break
         else:
             self.tableroBusqueda[fila][columna] = 'E'
+            self.turnos=self.turnos + 1
             break
 
    
