@@ -2,168 +2,268 @@ import creartablero
 
 # Aletario vs Aleatorio
 
-def azar_vs_azar(jugadorIA,jugadorRival):
 
-    while(not jugadorIA.flota_rival_hundida() and not jugadorRival.flota_rival_hundida()):
-   
-        jugadorIA.aleatoriopero(jugadorRival)
+def azar_vs_azar(jugadorIA, jugadorRival):
 
-        if(jugadorIA.flota_rival_hundida()):
-            print('Gano jugadorIA en un total de: ',jugadorIA.turnos,' turnos')
-            print('Perdio jugadorRival en un total de: ',jugadorRival.turnos,' turnos')
+    while (not jugadorIA.flota_rival_hundida() and not jugadorRival.flota_rival_hundida()):
+
+        jugadorIA.aleatorio_restringido(jugadorRival)
+
+        if (jugadorIA.flota_rival_hundida()):
+            print('Gano jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('Perdio jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
             break
-        elif(jugadorRival.flota_rival_hundida()):
-            print('Gano jugadorRival en un total de: ',jugadorRival.turnos,' turnos')
-            print('Perdio jugadorIA en un total de: ',jugadorIA.turnos,' turnos')
+        elif (jugadorRival.flota_rival_hundida()):
+            print('Gano jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('Perdio jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
             break
-      
-        jugadorRival.aleatoriopero(jugadorIA)
-     
-        if(jugadorIA.flota_rival_hundida()):
-            print('Gano jugadorIA en un total de: ',jugadorIA.turnos,' turnos')
-            print('Perdio jugadorRival en un total de: ',jugadorRival.turnos,' turnos')
+
+        jugadorRival.aleatorio_restringido(jugadorIA)
+
+        if (jugadorIA.flota_rival_hundida()):
+            print('Gano jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('Perdio jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
             break
-        elif(jugadorRival.flota_rival_hundida()):
-            print('Gano jugadorRival en un total de: ',jugadorRival.turnos,' turnos')
-            print('Perdio jugadorIA en un total de: ',jugadorIA.turnos,' turnos')
+        elif (jugadorRival.flota_rival_hundida()):
+            print('Gano jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('Perdio jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
             break
 
 # Greddy vs Greddy
 
-def greedy_vs_greedy(jugadorIA,jugadorRival):
 
-    while(not jugadorIA.flota_rival_hundida() and not jugadorRival.flota_rival_hundida()):
-   
+def greedy_vs_greedy(jugadorIA, jugadorRival):
+
+    while (not jugadorIA.flota_rival_hundida() and not jugadorRival.flota_rival_hundida()):
+
         jugadorIA.greedy(jugadorRival)
 
-        if(jugadorIA.nombre=='IA'):  
-           print(jugadorIA.direccion_target) 
-           creartablero.imprimirTablero(jugadorIA.tableroBusqueda)
-
-
-
-        jugadorIA.turnos=jugadorIA.turnos+1
-        if(jugadorIA.flota_rival_hundida()):
-            print('Gano jugadorIA en un total de: ',jugadorIA.turnos,' turnos')
-            print('Perdio jugadorRival en un total de: ',jugadorRival.turnos,' turnos')
-            print('hundidos por IA: ',jugadorIA.cuantos())
-            print('hundidos por Rival: ',jugadorRival.cuantos())
-            break
-        elif(jugadorRival.flota_rival_hundida()):
-            print('Gano jugadorRival en un total de: ',jugadorRival.turnos,' turnos')
-            print('Perdio jugadorIA en un total de: ',jugadorIA.turnos,' turnos')
-            print('hundidos por IA: ',jugadorIA.cuantos())
-            print('hundidos por Rival: ',jugadorRival.cuantos())
-            break
-      
-        jugadorRival.greedy(jugadorIA)
-        jugadorRival.turnos=jugadorRival.turnos+1
-        if(jugadorIA.flota_rival_hundida()):
-            print('Gano jugadorIA en un total de: ',jugadorIA.turnos,' turnos')
-            print('Perdio jugadorRival en un total de: ',jugadorRival.turnos,' turnos')
-            print('hundidos por IA: ',jugadorIA.cuantos())
-            print('hundidos por Rival: ',jugadorRival.cuantos())
-            break
-        elif(jugadorRival.flota_rival_hundida()):
-            print('Gano jugadorRival en un total de: ',jugadorRival.turnos,' turnos')
-            print('Perdio jugadorIA en un total de: ',jugadorIA.turnos,' turnos')
-            print('hundidos por IA: ',jugadorIA.cuantos())
-            print('hundidos por Rival: ',jugadorRival.cuantos())
-            break
-
-def greedy_vs_azar(jugadorIA,jugadorRival):
-
-    while(not jugadorIA.flota_rival_hundida() and not jugadorRival.flota_rival_hundida()):
-   
-        jugadorIA.greedy(jugadorRival)
-
-        if(jugadorIA.flota_rival_hundida()):
-            print('Gano jugadorIA en un total de: ',jugadorIA.turnos,' turnos')
-            print('Perdio jugadorRival en un total de: ',jugadorRival.turnos,' turnos')
-            print('hundidos por IA: ',jugadorIA.cuantos())
-            print('hundidos por Rival: ',jugadorRival.cuantos())
-            break
-        elif(jugadorRival.flota_rival_hundida()):
-            print('Gano jugadorRival en un total de: ',jugadorRival.turnos,' turnos')
-            print('Perdio jugadorIA en un total de: ',jugadorIA.turnos,' turnos')
-            print('hundidos por IA: ',jugadorIA.cuantos())
-            print('hundidos por Rival: ',jugadorRival.cuantos())
-            break
-      
-        jugadorRival.aleatoriopero(jugadorIA)
-     
-        if(jugadorIA.flota_rival_hundida()):
-            print('Gano jugadorIA en un total de: ',jugadorIA.turnos,' turnos')
-            print('Perdio jugadorRival en un total de: ',jugadorRival.turnos,' turnos')
-            print('hundidos por IA: ',jugadorIA.cuantos())
-            print('hundidos por Rival: ',jugadorRival.cuantos())
-            break
-        elif(jugadorRival.flota_rival_hundida()):
-            print('Gano jugadorRival en un total de: ',jugadorRival.turnos,' turnos')
-            print('Perdio jugadorIA en un total de: ',jugadorIA.turnos,' turnos')
-            print('hundidos por IA: ',jugadorIA.cuantos())
-            print('hundidos por Rival: ',jugadorRival.cuantos())
-            break
-
-def huntTarget_vs_huntTarget(jugadorIA,jugadorRival):
-    ciclos=0
-    cambiosIA=0
-    cambiosRival=0 
-
-
-    while(not jugadorIA.flota_rival_hundida() and not jugadorRival.flota_rival_hundida()):
-        ciclos=ciclos+1
-
-        if(jugadorIA.nombre=='IA'):  
-            print(jugadorIA.direccion_target) 
+        if (jugadorIA.nombre == 'IA'):
+            print(jugadorIA.direccion_target)
             creartablero.imprimirTablero(jugadorIA.tableroBusqueda)
 
-        while(contador(jugadorIA.tableroBusqueda)!=cambiosIA+1): 
+        jugadorIA.turnos = jugadorIA.turnos+1
+        if (jugadorIA.flota_rival_hundida()):
+            print('Gano jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('Perdio jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('hundidos por IA: ', jugadorIA.cuantos())
+            print('hundidos por Rival: ', jugadorRival.cuantos())
+            break
+        elif (jugadorRival.flota_rival_hundida()):
+            print('Gano jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('Perdio jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('hundidos por IA: ', jugadorIA.cuantos())
+            print('hundidos por Rival: ', jugadorRival.cuantos())
+            break
+
+        jugadorRival.greedy(jugadorIA)
+        jugadorRival.turnos = jugadorRival.turnos+1
+        if (jugadorIA.flota_rival_hundida()):
+            print('Gano jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('Perdio jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('hundidos por IA: ', jugadorIA.cuantos())
+            print('hundidos por Rival: ', jugadorRival.cuantos())
+            break
+        elif (jugadorRival.flota_rival_hundida()):
+            print('Gano jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('Perdio jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('hundidos por IA: ', jugadorIA.cuantos())
+            print('hundidos por Rival: ', jugadorRival.cuantos())
+            break
+
+
+def greedy_vs_azar(jugadorIA, jugadorRival):
+
+    while (not jugadorIA.flota_rival_hundida() and not jugadorRival.flota_rival_hundida()):
+
+        jugadorIA.greedy(jugadorRival)
+
+        if (jugadorIA.flota_rival_hundida()):
+            print('Gano jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('Perdio jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('hundidos por IA: ', jugadorIA.cuantos())
+            print('hundidos por Rival: ', jugadorRival.cuantos())
+            break
+        elif (jugadorRival.flota_rival_hundida()):
+            print('Gano jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('Perdio jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('hundidos por IA: ', jugadorIA.cuantos())
+            print('hundidos por Rival: ', jugadorRival.cuantos())
+            break
+
+        jugadorRival.aleatorio_restringido(jugadorIA)
+
+        if (jugadorIA.flota_rival_hundida()):
+            print('Gano jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('Perdio jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('hundidos por IA: ', jugadorIA.cuantos())
+            print('hundidos por Rival: ', jugadorRival.cuantos())
+            break
+        elif (jugadorRival.flota_rival_hundida()):
+            print('Gano jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('Perdio jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('hundidos por IA: ', jugadorIA.cuantos())
+            print('hundidos por Rival: ', jugadorRival.cuantos())
+            break
+
+
+def huntTarget_vs_huntTarget(jugadorIA, jugadorRival):
+    ciclos = 0
+    cambiosIA = 0
+    cambiosRival = 0
+
+    while (not jugadorIA.flota_rival_hundida() and not jugadorRival.flota_rival_hundida()):
+        ciclos = ciclos+1
+
+        if (jugadorIA.nombre == 'IA'):
+            print(jugadorIA.direccion_target)
+            creartablero.imprimirTablero(jugadorIA.tableroBusqueda)
+
+        while (contador(jugadorIA.tableroBusqueda) != cambiosIA+1):
             print(cambiosIA)
             print(contador(jugadorIA.tableroBusqueda))
-            jugadorIA.hunt_target(jugadorRival,'aleatorio_restringido')
+            jugadorIA.hunt_target(jugadorRival, 'aleatorio_restringido')
 
-        cambiosIA=cambiosIA+1
+        cambiosIA = cambiosIA+1
 
-        jugadorIA.turnos=jugadorIA.turnos+1
+        jugadorIA.turnos = jugadorIA.turnos+1
 
-        if(jugadorIA.flota_rival_hundida()):
-            print('Gano jugadorIA en un total de: ',jugadorIA.turnos,' turnos')
-            print('Perdio jugadorRival en un total de: ',jugadorRival.turnos,' turnos')
-            print('hundidos por IA: ',jugadorIA.cuantos())
-            print('hundidos por Rival: ',jugadorRival.cuantos())
-            print('ciclos: ',ciclos)
+        if (jugadorIA.flota_rival_hundida()):
+            print('Gano jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('Perdio jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('hundidos por IA: ', jugadorIA.cuantos())
+            print('hundidos por Rival: ', jugadorRival.cuantos())
+            print('ciclos: ', ciclos)
             break
-        elif(jugadorRival.flota_rival_hundida()):
-            print('Gano jugadorRival en un total de: ',jugadorRival.turnos,' turnos')
-            print('Perdio jugadorIA en un total de: ',jugadorIA.turnos,' turnos')
-            print('hundidos por IA: ',jugadorIA.cuantos())
-            print('hundidos por Rival: ',jugadorRival.cuantos())
-            print('ciclos: ',ciclos)
+        elif (jugadorRival.flota_rival_hundida()):
+            print('Gano jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('Perdio jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('hundidos por IA: ', jugadorIA.cuantos())
+            print('hundidos por Rival: ', jugadorRival.cuantos())
+            print('ciclos: ', ciclos)
             break
-      
-         
 
-        while(contador(jugadorRival.tableroBusqueda)!=cambiosRival+1): 
-         jugadorRival.hunt_target(jugadorIA,'greedy')
-        
-        jugadorRival.turnos=jugadorRival.turnos+1
-        cambiosRival=cambiosRival+1
+        while (contador(jugadorRival.tableroBusqueda) != cambiosRival+1):
+            jugadorRival.hunt_target(jugadorIA, 'greedy')
 
-        if(jugadorIA.flota_rival_hundida()):
-            print('Gano jugadorIA en un total de: ',jugadorIA.turnos,' turnos')
-            print('Perdio jugadorRival en un total de: ',jugadorRival.turnos,' turnos')
-            print('hundidos por IA: ',jugadorIA.cuantos())
-            print('hundidos por Rival: ',jugadorRival.cuantos())
-            print('ciclos: ',ciclos)
+        jugadorRival.turnos = jugadorRival.turnos+1
+        cambiosRival = cambiosRival+1
+
+        if (jugadorIA.flota_rival_hundida()):
+            print('Gano jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('Perdio jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('hundidos por IA: ', jugadorIA.cuantos())
+            print('hundidos por Rival: ', jugadorRival.cuantos())
+            print('ciclos: ', ciclos)
             break
-        elif(jugadorRival.flota_rival_hundida()):
-            print('Gano jugadorRival en un total de: ',jugadorRival.turnos,' turnos')
-            print('Perdio jugadorIA en un total de: ',jugadorIA.turnos,' turnos')
-            print('hundidos por IA: ',jugadorIA.cuantos())
-            print('hundidos por Rival: ',jugadorRival.cuantos())
-            print('ciclos: ',ciclos)
+        elif (jugadorRival.flota_rival_hundida()):
+            print('Gano jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('Perdio jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('hundidos por IA: ', jugadorIA.cuantos())
+            print('hundidos por Rival: ', jugadorRival.cuantos())
+            print('ciclos: ', ciclos)
             break
+
+
+def heatMap_vs_huntTarget(jugadorIA, jugadorRival):
+    ciclos = 0
+    cambiosIA = 0
+    cambiosRival = 0
+
+    while (not jugadorIA.flota_rival_hundida() and not jugadorRival.flota_rival_hundida()):
+        ciclos = ciclos+1
+
+        if (jugadorIA.nombre == 'IA'):
+            print(jugadorIA.direccion_target)
+            creartablero.imprimirTablero(jugadorIA.tableroBusqueda)
+            jugadorIA.heat_map(jugadorRival)
+
+        while (contador(jugadorIA.tableroBusqueda) != cambiosIA+1):
+            print(cambiosIA)
+            print(contador(jugadorIA.tableroBusqueda))
+            if (jugadorIA.flota_rival_hundida()):
+                break
+
+        cambiosIA = cambiosIA+1
+
+        jugadorIA.turnos = jugadorIA.turnos+1
+
+        if (jugadorIA.flota_rival_hundida()):
+            print('Gano jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('Perdio jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('hundidos por IA: ', jugadorIA.cuantos())
+            print('hundidos por Rival: ', jugadorRival.cuantos())
+            print('ciclos: ', ciclos)
+            break
+        elif (jugadorRival.flota_rival_hundida()):
+            print('Gano jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('Perdio jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('hundidos por IA: ', jugadorIA.cuantos())
+            print('hundidos por Rival: ', jugadorRival.cuantos())
+            print('ciclos: ', ciclos)
+            break
+
+        while (contador(jugadorRival.tableroBusqueda) != cambiosRival+1):
+            jugadorRival.hunt_target(jugadorIA, 'greedy')
+
+        jugadorRival.turnos = jugadorRival.turnos+1
+        cambiosRival = cambiosRival+1
+
+        if (jugadorIA.flota_rival_hundida()):
+            print('Gano jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('Perdio jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('hundidos por IA: ', jugadorIA.cuantos())
+            print('hundidos por Rival: ', jugadorRival.cuantos())
+            print('ciclos: ', ciclos)
+            break
+        elif (jugadorRival.flota_rival_hundida()):
+            print('Gano jugadorRival en un total de: ',
+                  jugadorRival.turnos, ' turnos')
+            print('Perdio jugadorIA en un total de: ',
+                  jugadorIA.turnos, ' turnos')
+            print('hundidos por IA: ', jugadorIA.cuantos())
+            print('hundidos por Rival: ', jugadorRival.cuantos())
+            print('ciclos: ', ciclos)
+            break
+    return contador(jugadorIA.tableroBusqueda)
 
 
 def contador(matriz):

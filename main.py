@@ -2,66 +2,48 @@ import creartablero
 from clases.agente import Agente
 import versus
 
+impirmirinicio = False
 
-#tablero = creartablero.generar_tablero(10, 10) # Crea un tablero de 10x10
-#creartablero.agregar_barcos(tablero, [5, 4, 3, 3, 2]) # Agrega barcos de diferentes tamaños
-matriz = [[0] * 10 for  _ in range(10)]  # Crear una matriz de 10x10 con elementos inicializados a 0
-matriz1 = [[0] * 10 for _ in range(10)]
-for i in range(len(matriz)):
-    matriz[i][0] = 1
-    matriz[i][1] = 1
-    matriz[9][1]=0
-    matriz[8][1]=0
-    matriz[7][1]=0
-for i in range(len(matriz)):
-    matriz1[i][0] = 1
-    matriz1[i][1] = 1
-    matriz1[9][1]=0
-    matriz1[8][1]=0
-    matriz1[7][1]=0
-
-
-matriz = [[0] * 10 for _ in range(10)]  # Crear una matriz de 10x10 con elementos inicializados a 0
-matriz1 = [[0] * 10 for _ in range(10)]
-for i in range(len(matriz)):
-    matriz[i][0] = 1
-    matriz[i][1] = 1
-    matriz[9][1]=0
-    matriz[8][1]=0
-    matriz[7][1]=0
-for i in range(len(matriz)):
-    matriz1[i][0] = 1
-    matriz1[i][1] = 1
-    matriz1[9][1]=0
-    matriz1[8][1]=0
-    matriz1[7][1]=0
 
 jugadorIA = Agente('IA')
 jugadorRival = Agente('Rival')
+
+matriz = [[0] * 10 for _ in range(10)]
+
 # jugadorIA.cambiar_tablero_propio(matriz)
-# jugadorRival.cambiar_tablero_propio(matriz1)
 
+# ------- INICIO -------
+if impirmirinicio:
+    print('Jugador IA TABLERO PROPIO')
+    creartablero.imprimirTablero(jugadorIA.tableroPropio)
+    print('Jugador IA TABLERO BUSQUEDA')
+    creartablero.imprimirTablero(jugadorIA.tableroBusqueda)
 
-jugadorIA = Agente()
-jugadorRival = Agente()
-jugadorRival.cambiar_tablero_propio(matriz)
-jugadorIA.greedy(jugadorRival)
-print("tablero original")
-creartablero.imprimirTablero(jugadorRival.tableroPropio)
-print("tablero con Greedy")
-creartablero.imprimirTablero(jugadorIA.tablerobBusqueda)
+    print('Jugador RIVAL TABLERO PROPIO')
+    creartablero.imprimirTablero(jugadorRival.tableroPropio)
+    print('Jugador RIVAL TABLERO BUSQUEDA')
+    creartablero.imprimirTablero(jugadorRival.tableroBusqueda)
 
-#para aleatorio voy a usar y para diferenciar que hizo greedy y que hizo aleatorio
-#jugadorIA.aleatorio(jugadorRival)
+print('Numero de Juegos\tCantidad de turnos')
+# for i in range(100000):
+#    del jugadorRival
+#     del jugadorIA
+#     jugadorIA = Agente('IA')
+#     jugadorRival = Agente('Rival')  #Crear nuevo jugadorIA
 
-creartablero.imprimirTablero(jugadorIA.tablerobBusqueda)
-#game
+#     versus.azar_vs_azar(jugadorIA,jugadorRival)
 
+#     print(i+1,'\t',jugadorIA.turnos)
 
+versus.heatMap_vs_huntTarget(jugadorIA, jugadorRival)
 
+# ------- FINAL -------
+print('Jugador IA TABLERO PROPIO')
+creartablero.imprimirTablero(jugadorIA.tableroPropio)
+print('Jugador IA TABLERO BUSQUEDA')
+creartablero.imprimirTablero(jugadorIA.tableroBusqueda)
 
-
-#jugadorIA.greedy(tablero)
-
-#nose si esto esta funcionado bien aiuda
-
+print('Jugador RIVAL TABLERO PROPIO')
+creartablero.imprimirTablero(jugadorIA.tableroPropio)
+print('Jugador RIVAL TABLERO BUSQUEDA')
+creartablero.imprimirTablero(jugadorIA.tableroBusqueda)
