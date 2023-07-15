@@ -13,9 +13,7 @@ def gen_prob_map(self):
         for row in range(10):
             for col in range(10):
                 if self.tableroBusqueda[row][col] != 'X' and self.tableroBusqueda[row][col] != 'E':
-                    # get potential ship endpoints
                     endpoints = []
-                    # add 1 to all endpoints to compensate for python indexing
                     if row - use_size >= 0:
                         endpoints.append(
                             ((row - use_size, col), (row + 1, col + 1)))
@@ -40,54 +38,66 @@ def gen_prob_map(self):
                 if self.tableroBusqueda[row][col] == 'X':
 
                     if (row + 1 <= 9) and (self.tableroBusqueda[row + 1][col] == 0):
-                        prob_map[row + 1][col] += 13
+                        if ((row - 1 >= 0) and self.tableroBusqueda[row - 1][col] == 'x'):
+                            prob_map[row + 1][col] += 13
+                        else:
+                            prob_map[row + 1][col] += 9
                     if (row - 1 >= 0) and (self.tableroBusqueda[row - 1][col] == 0):
-                        prob_map[row - 1][col] += 13
+                        if ((row + 1 <= 9) and self.tableroBusqueda[row + 1][col] == 'x'):
+                            prob_map[row - 1][col] += 13
+                        else:
+                            prob_map[row - 1][col] += 9
                     if (col + 1 <= 9) and (self.tableroBusqueda[row][col + 1] == 0):
-                        prob_map[row][col + 1] += 13
+                        if (col - 1 >= 0) and self.tableroBusqueda[row][col-1] == 'X':
+                            prob_map[row][col + 1] += 13
+                        else:
+                            prob_map[row][col + 1] += 9
                     if (col - 1 >= 0) and (self.tableroBusqueda[row][col - 1] == 0):
-                        prob_map[row][col - 1] += 13
+                        if (col + 1 <= 9) and self.tableroBusqueda[row][col + 1] == 'X':
+                            prob_map[row][col - 1] += 13
+                        else:
+                            prob_map[row][col - 1] += 9
                 elif self.tableroBusqueda[row][col] == 'E':
                     prob_map[row][col] = 0
                     if (row + 1 <= 9) and (self.tableroBusqueda[row + 1][col] == 0):
-                        prob_map[row + 1][col] -= 5
-                        if (prob_map[row + 1][col] <= 4):
-                            prob_map[row + 1][col] = 5
+                        prob_map[row + 1][col] -= 3
+                        if (prob_map[row + 1][col] <= 1):
+                            prob_map[row + 1][col] = 1
                     if (row - 1 >= 0) and (self.tableroBusqueda[row - 1][col] == 0):
-                        prob_map[row - 1][col] -= 5
-                        if (prob_map[row - 1][col] <= 4):
-                            prob_map[row - 1][col] = 5
+                        prob_map[row - 1][col] -= 3
+                        if (prob_map[row - 1][col] <= 1):
+                            prob_map[row - 1][col] = 1
                     if (col + 1 <= 9) and (self.tableroBusqueda[row][col + 1] == 0):
-                        prob_map[row][col + 1] -= 5
-                        if (prob_map[row][col + 1] <= 4):
-                            prob_map[row][col + 1] = 5
+                        prob_map[row][col + 1] -= 3
+                        if (prob_map[row][col + 1] <= 1):
+                            prob_map[row][col + 1] = 1
                     if (col - 1 >= 0) and (self.tableroBusqueda[row][col - 1] == 0):
-                        prob_map[row][col - 1] -= 5
-                        if (prob_map[row][col - 1] <= 4):
-                            prob_map[row][col - 1] = 5
-                if self.tableroBusqueda[row][col] == 0:
-                    prob_map[row][col] += .5
+                        prob_map[row][col - 1] -= 3
+                        if (prob_map[row][col - 1] <= 1):
+                            prob_map[row][col - 1] = 1
     self.PROB_MAP = prob_map
 
 
 def guess_prob(self):
-    self.gen_prob()
+    self.gen_prob()  # Generar mapa de probabilidades basado en el estado actual
     # get the row, col numbers of the largest element in PROB_MAP
     # https://thispointer.com/find-max-value-its-index-in-numpy-array-numpy-amax/
-    max_indices = np.where(self.PROB_MAP == np.amax(self.PROB_MAP))
+    max_indices = np.where(self.PROB_MAP == np.amax(
+        self.PROB_MAP))  # np es numpy
     guess_row, guess_col = max_indices[0][0], max_indices[1][0]
-
     return guess_row, guess_col
 
 
 def busqueda_heat_map(self, rival):
     flag = False
     while not flag:
+        creartablero.imprimirTablero(self.PROB_MAP)
+
         guess_row, guess_col = guess_prob(self)
+
         if (self.pregunta(rival, guess_row, guess_col)):
             self.tableroBusqueda[guess_row][guess_col] = 'X'
-            creartablero.imprimirTablero(self.tableroBusqueda)
-            creartablero.imprimirTablero(self.PROB_MAP)
+
         else:
             self.tableroBusqueda[guess_row][guess_col] = 'E'
         flag = self.flota_rival_hundida()
